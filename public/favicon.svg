@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Anyone But Gray campaign mark">
+  <rect width="64" height="64" rx="10" fill="#1F355A"/>
+  <rect x="5" y="5" width="54" height="54" rx="8" fill="none" stroke="#C9A227" stroke-width="4"/>
+  <text x="32" y="39" fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" text-anchor="middle">AB</text>
+</svg>
