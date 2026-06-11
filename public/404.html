@@ -3,15 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redirecting | Anyone But Gray</title>
+    <title>Anyone But Gray</title>
     <script>
-      (function () {
-        var path = window.location.pathname;
-        var repoBase = '/anyonebutgray/';
-        var base = path.indexOf(repoBase) === 0 ? repoBase : '/';
-        var route = path.replace(base, '/');
-        window.location.replace(base + '?route=' + encodeURIComponent(route) + window.location.hash);
-      })();
+      sessionStorage.redirect = location.pathname + location.search + location.hash;
+      location.replace('/');
     </script>
   </head>
   <body>
