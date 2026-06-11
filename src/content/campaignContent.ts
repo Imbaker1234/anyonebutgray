@@ -94,7 +94,7 @@ export const campaignContent = {
     {
       question: 'Why are some sections marked as placeholders?',
       answer:
-        'The preview site avoids inventing campaign claims. Replace the placeholder biography, priorities, contact details, and disclaimer with confirmed campaign language before publishing.'
+        'This site avoids inventing campaign claims. Replace the placeholder biography, priorities, contact details, and disclaimer with confirmed campaign language before publishing.'
     }
   ] satisfies CampaignFaq[],
   contact: {

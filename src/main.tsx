@@ -6,7 +6,6 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './styles/global.css';
-import './styles/themes.css';
 import { App } from './App';
 
 const redirectRoute = new URLSearchParams(window.location.search).get('route');

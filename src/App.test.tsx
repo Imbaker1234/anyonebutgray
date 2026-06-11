@@ -2,26 +2,17 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { App } from './App';
 import { campaignContent } from './content/campaignContent';
-import { themeRoutes } from './themes/themeRegistry';
 
-describe('campaign preview site', () => {
-  it('defines five named review themes with distinct layouts from shared content', () => {
-    expect(themeRoutes.map((theme) => theme.slug)).toEqual([
-      'modern-civic',
-      'patriotic-classic',
-      'warm-local',
-      'courthouse-ledger',
-      'river-county'
-    ]);
-    expect(new Set(themeRoutes.map((theme) => theme.layout)).size).toBe(themeRoutes.length);
+describe('Anyone But Gray single-page site', () => {
+  it('uses the shared Anyone But Gray content', () => {
     expect(campaignContent.candidate.name).toBe('Anyone But Gray');
     expect(campaignContent.election.date).toBe('August 6, 2026');
     expect(campaignContent.launchReadiness.disclaimerConfirmed).toBe(false);
   });
 
-  it('renders the selected theme route with the vote-info call to action', () => {
+  it('renders the homepage as the only campaign page', () => {
     render(
-      <MemoryRouter initialEntries={['/patriotic-classic']}>
+      <MemoryRouter initialEntries={['/']}>
         <App />
       </MemoryRouter>
     );
@@ -32,36 +23,26 @@ describe('campaign preview site', () => {
     );
     expect(screen.getAllByText(/Independent voter information/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/confirm before launch/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Theme preview routes/i)).not.toBeInTheDocument();
   });
 
-  it('defaults the homepage to Modern Civic for review', () => {
+  it('redirects legacy routes back to the single page', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/old-review-route']}>
         <App />
       </MemoryRouter>
     );
 
-    expect(screen.getByTestId('active-theme')).toHaveTextContent('Modern Civic');
+    expect(screen.getByRole('heading', { name: /Anyone But Gray/i })).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Theme preview routes/i)).not.toBeInTheDocument();
   });
 
-  it.each(themeRoutes)('renders the $label preview route', (theme) => {
-    render(
-      <MemoryRouter initialEntries={[theme.route]}>
-        <App />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByTestId('active-theme')).toHaveTextContent(theme.label);
-    expect(screen.getByTestId('layout-kind')).toHaveTextContent(theme.layoutLabel);
-    expect(screen.getByText(theme.tone)).toBeInTheDocument();
-  });
-
-  it('scrolls to hash sections after route render', async () => {
+  it('scrolls to hash sections after the single page renders', async () => {
     const scrollIntoView = vi.fn();
     Element.prototype.scrollIntoView = scrollIntoView;
 
     render(
-      <MemoryRouter initialEntries={['/modern-civic#vote-info']}>
+      <MemoryRouter initialEntries={['/#vote-info']}>
         <App />
       </MemoryRouter>
     );

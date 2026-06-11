@@ -1,3 +1,3 @@
 # Campaign Assets
 
-Place confirmed campaign imagery in this folder only after the campaign approves the asset and its usage. The preview site currently uses styled visual slots until final assets exist.
+Place confirmed campaign imagery in this folder only after the campaign approves the asset and its usage. The site currently uses a styled visual slot until final assets exist.
